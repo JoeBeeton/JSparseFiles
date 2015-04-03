@@ -52,6 +52,13 @@ public class TestRequestValidation extends TestBase {
 	}
 	
 	@Test
+	public void testWithNullPath() throws IOException, ValidationException {
+		Path file = null;
+		SparseFileRequest request = new SparseFileRequest( file, FileUtils.ONE_MB, true );
+		runFailValidationTest( request );
+	}
+	
+	@Test
 	public void testWithPathBeingSetToADirectoryWithOverwriteFlagOff() throws ValidationException {
 		Path file = Paths.get( getTestDir().toString() );
 		SparseFileRequest request = new SparseFileRequest( file, FileUtils.ONE_MB, false );
@@ -64,15 +71,7 @@ public class TestRequestValidation extends TestBase {
 		SparseFileRequest request = new SparseFileRequest( file, FileUtils.ONE_MB, true );
 		runFailValidationTest( request );
 	}
-	
-	@Test
-	public void testWithOverlappingDataSections() throws ValidationException {
-		Path file = Paths.get( getTestDir().toString(), "sparsefile.dat" );
-		SparseFileRequest request = new SparseFileRequest( file, FileUtils.ONE_MB, true, 
-				new DataSections( 1000, 2000 ),
-				new DataSections( 1500, 2500 ) );
-		runFailValidationTest( request );
-	}
+
 	
 	@Test
 	public void testWithNegativeDataSections() throws ValidationException {
