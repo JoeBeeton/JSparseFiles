@@ -10,11 +10,13 @@ import java.nio.file.Paths;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import uk.org.freedonia.jsparsefiles.creator.validator.ValidationException;
+
 public class TestSparseFilesCreator extends TestBase {
 	
 
-	@Test( expected=IOException.class )
-	public void testCreateSparseFileWithFileAlreadyExistingAndOverwriteOff() throws IOException {
+	@Test( expected=ValidationException.class )
+	public void testCreateSparseFileWithFileAlreadyExistingAndOverwriteOff() throws IOException, ValidationException {
 		Path testDir = getTestDir();
 		Path testSparseFile = Paths.get( testDir.toString(), "testSparse.dat" );
 		testSparseFile.toFile().createNewFile();
@@ -27,7 +29,7 @@ public class TestSparseFilesCreator extends TestBase {
 	}
 	
 	@Test
-	public void testCreateSparseFileWithFileAlreadyExistingAndOverwriteOn() throws IOException {
+	public void testCreateSparseFileWithFileAlreadyExistingAndOverwriteOn() throws IOException, ValidationException {
 		Path testDir = getTestDir();
 		Path testSparseFile = Paths.get( testDir.toString(), "testSparse.dat" );
 		testSparseFile.toFile().createNewFile();
@@ -44,7 +46,7 @@ public class TestSparseFilesCreator extends TestBase {
 	}
 	
 	@Test
-	public void testCreateSparseFileOfSize() throws IOException {
+	public void testCreateSparseFileOfSize() throws IOException, ValidationException {
 		Path testDir = getTestDir();
 		Path testSparseFile = Paths.get( testDir.toString(), "testSparse.dat" );
 		long fileSize = FileUtils.ONE_MB;
@@ -60,7 +62,7 @@ public class TestSparseFilesCreator extends TestBase {
 	}
 	
 	@Test
-	public void testCreateSparseFileWithDataSection() throws IOException {
+	public void testCreateSparseFileWithDataSection() throws IOException, ValidationException {
 		Path testDir = getTestDir();
 		Path testSparseFile = Paths.get( testDir.toString(), "testSparse.dat" );
 		long fileSize = FileUtils.ONE_MB;
@@ -76,7 +78,7 @@ public class TestSparseFilesCreator extends TestBase {
 	}
 	
 	@Test
-	public void testCreateSparseFileWithMultipleDataSections() throws IOException {
+	public void testCreateSparseFileWithMultipleDataSections() throws IOException, ValidationException {
 		Path testDir = getTestDir();
 		Path testSparseFile = Paths.get( testDir.toString(), "testSparse.dat" );
 		testSparseFile.toFile().createNewFile();
