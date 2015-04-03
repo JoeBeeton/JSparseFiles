@@ -14,6 +14,8 @@ public class DataSections {
 		return endOffset;
 	}
 
+
+
 	public void setEndOffset(long endOffset) {
 		this.endOffset = endOffset;
 	}
@@ -24,6 +26,12 @@ public class DataSections {
 
 	public void setStartOffset(long startOffset) {
 		this.startOffset = startOffset;
+	}
+	
+	@Override
+	public String toString() {
+		return "DataSections [startOffset=" + startOffset + ", endOffset="
+				+ endOffset + "]";
 	}
 
 }

@@ -1,5 +1,11 @@
 package uk.org.freedonia.jsparsefiles.creator.validator;
 
+
+/**
+ * The ValidationResult contains the result of the validation of the SparseFileRequest.
+ * @author jbeeton
+ *
+ */
 public class ValidationResult {
 	
 	private boolean isValid;
