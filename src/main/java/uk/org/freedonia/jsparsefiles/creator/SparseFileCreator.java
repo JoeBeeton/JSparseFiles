@@ -8,5 +8,9 @@ public class SparseFileCreator {
 		
 	}
 	
+	private static void validateRequest( SparseFileRequest request ) {
+		
+	}
+	
 
 }

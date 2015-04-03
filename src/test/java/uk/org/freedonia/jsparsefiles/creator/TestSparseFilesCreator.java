@@ -3,22 +3,14 @@ package uk.org.freedonia.jsparsefiles.creator;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Before;
 import org.junit.Test;
 
-public class TestSparseFilesCreator {
-	
-	@Before
-	public void setup() throws IOException {
-		FileUtils.deleteDirectory( getTestDir().toFile() );
-	}
-	
+public class TestSparseFilesCreator extends TestBase {
 	
 
 	@Test( expected=IOException.class )
@@ -103,17 +95,6 @@ public class TestSparseFilesCreator {
 	
 	
 	
-	private File getTmpDir() {
-		return new File( System.getProperty("java.io.tmpdir") );
-	}
-	
-	private Path getTestDir() {
-		File tmpDir = getTmpDir();
-		Path testDir = Paths.get( 
-				tmpDir.getAbsolutePath(),
-				this.getClass().getSimpleName() );
-		testDir.toFile().mkdirs();
-		return testDir;
-	}
+
 	
 }
