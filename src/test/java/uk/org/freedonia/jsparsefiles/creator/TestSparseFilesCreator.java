@@ -70,7 +70,7 @@ public class TestSparseFilesCreator extends TestBase {
 				testSparseFile, 
 				fileSize, 
 				true, 
-				new DataSections( 1024l, 2048l ) );
+				new DataSection( 1024l, 2048l ) );
 		SparseFileCreator.createSparseFile( request );
 		assertTrue( testSparseFile.toFile().isFile() );
 		assertEquals( fileSize, testSparseFile.toFile().length() );
@@ -87,8 +87,8 @@ public class TestSparseFilesCreator extends TestBase {
 				testSparseFile, 
 				fileSize, 
 				true, 
-				new DataSections( 1024l, 2048l ),
-				new DataSections( 102400l, 204800l ));
+				new DataSection( 1024l, 2048l ),
+				new DataSection( 102400l, 204800l ));
 		SparseFileCreator.createSparseFile( request );
 		assertTrue( testSparseFile.toFile().isFile() );
 		assertEquals( fileSize, testSparseFile.toFile().length() );

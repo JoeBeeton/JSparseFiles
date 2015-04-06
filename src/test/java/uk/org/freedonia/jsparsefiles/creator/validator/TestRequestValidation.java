@@ -11,7 +11,7 @@ import java.nio.file.Paths;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
-import uk.org.freedonia.jsparsefiles.creator.DataSections;
+import uk.org.freedonia.jsparsefiles.creator.DataSection;
 import uk.org.freedonia.jsparsefiles.creator.SparseFileRequest;
 import uk.org.freedonia.jsparsefiles.creator.TestBase;
 
@@ -77,7 +77,7 @@ public class TestRequestValidation extends TestBase {
 	public void testWithNegativeDataSections() throws ValidationException {
 		Path file = Paths.get( getTestDir().toString(), "sparsefile.dat" );
 		SparseFileRequest request = new SparseFileRequest( file, FileUtils.ONE_MB, true, 
-				new DataSections( -1000l, 2000l ));
+				new DataSection( -1000l, 2000l ));
 		runFailValidationTest( request );
 	}
 	
@@ -85,7 +85,7 @@ public class TestRequestValidation extends TestBase {
 	public void testWithDataSectionLargerThanStatedFileSize() throws ValidationException {
 		Path file = Paths.get( getTestDir().toString(), "sparsefile.dat" );
 		SparseFileRequest request = new SparseFileRequest( file, FileUtils.ONE_MB, true, 
-				new DataSections( FileUtils.ONE_MB, 5*FileUtils.ONE_MB ));
+				new DataSection( FileUtils.ONE_MB, 5*FileUtils.ONE_MB ));
 		runFailValidationTest( request );
 	}
 	

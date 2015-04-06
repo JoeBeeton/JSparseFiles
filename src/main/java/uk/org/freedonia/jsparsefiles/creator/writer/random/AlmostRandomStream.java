@@ -1,4 +1,4 @@
-package uk.org.freedonia.jsparsefiles.creator.random;
+package uk.org.freedonia.jsparsefiles.creator.writer.random;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,8 @@ import org.apache.commons.lang3.RandomUtils;
 /**
  * Returns an almost random stream of bytes forever.
  * However to help denote the start and end of the sparseness in the file I've
- * excluded the NULL ( zero ) bytes from the stream. All Zeros are now 1's.
+ * excluded the NULL ( zero ) bytes from the stream. All Zeros are now 1's. Also -1 is used to denote the end of the
+ * file in a stream so -1 is also replaced with 1.
  * @author jbeeton
  *
  */
@@ -34,7 +35,7 @@ public class AlmostRandomStream extends InputStream {
 	private void loadNewRandomyData() {
 		byte[] byteArray = RandomUtils.nextBytes(4096);
 		for (int i = 0; i < byteArray.length; i++) {
-			if ( byteArray[i] == (byte)0 ) {
+			if ( byteArray[i] == (byte)0 || byteArray[i] == (byte)-1 ) {
 				byteArray[i] = (byte)1;
 			}
 			almostRandomBuffer.add(byteArray[i]);

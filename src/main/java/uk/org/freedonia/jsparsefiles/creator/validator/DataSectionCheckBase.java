@@ -1,10 +1,9 @@
 package uk.org.freedonia.jsparsefiles.creator.validator;
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import uk.org.freedonia.jsparsefiles.creator.DataSections;
+import uk.org.freedonia.jsparsefiles.creator.DataSection;
 import uk.org.freedonia.jsparsefiles.creator.SparseFileRequest;
 
 /**
@@ -20,8 +19,8 @@ public abstract class DataSectionCheckBase implements IValidator {
 	@Override
 	public ValidationResult validateRequest( SparseFileRequest request ) {
 		if ( request.getSections() != null  ) {
-			Optional<DataSections> optionalResult = Arrays.asList( 
-					request.getSections() ).parallelStream().filter( getDataSectionPredicate( request ) ).findFirst();
+			Optional<DataSection> optionalResult = 
+					request.getSections().parallelStream().filter( getDataSectionPredicate( request ) ).findFirst();
 			if ( optionalResult.isPresent() ) {
 				return getInvalidResult( optionalResult.get(), request );
 			} 
@@ -35,14 +34,14 @@ public abstract class DataSectionCheckBase implements IValidator {
 	 * @param request
 	 * @return
 	 */
-	protected abstract ValidationResult getInvalidResult( DataSections ds, SparseFileRequest request );
+	protected abstract ValidationResult getInvalidResult( DataSection ds, SparseFileRequest request );
 	
 	/**
 	 * Returns the predicate used to test the DataSection in question. If the predicate passes the DataSection is invalid.
 	 * @param request
 	 * @return
 	 */
-	protected abstract Predicate<DataSections> getDataSectionPredicate( SparseFileRequest request );
+	protected abstract Predicate<DataSection> getDataSectionPredicate( SparseFileRequest request );
 
 
 	

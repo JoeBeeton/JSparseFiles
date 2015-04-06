@@ -8,6 +8,8 @@ import java.io.InputStream;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import uk.org.freedonia.jsparsefiles.creator.writer.random.AlmostRandomStream;
+
 public class TestAlmostRandomStream {
 	
 	@Test

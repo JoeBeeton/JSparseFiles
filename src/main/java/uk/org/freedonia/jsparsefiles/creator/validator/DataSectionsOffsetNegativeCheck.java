@@ -2,7 +2,7 @@ package uk.org.freedonia.jsparsefiles.creator.validator;
 
 import java.util.function.Predicate;
 
-import uk.org.freedonia.jsparsefiles.creator.DataSections;
+import uk.org.freedonia.jsparsefiles.creator.DataSection;
 import uk.org.freedonia.jsparsefiles.creator.SparseFileRequest;
 
 /**
@@ -13,7 +13,7 @@ import uk.org.freedonia.jsparsefiles.creator.SparseFileRequest;
 public class DataSectionsOffsetNegativeCheck extends DataSectionCheckBase implements IValidator {
 
 	@Override
-	protected ValidationResult getInvalidResult( DataSections ds,
+	protected ValidationResult getInvalidResult( DataSection ds,
 			SparseFileRequest request ) {
 		StringBuilder msg = new StringBuilder();
 		msg.append("Invalid data section found : " + ds.toString() );
@@ -21,11 +21,11 @@ public class DataSectionsOffsetNegativeCheck extends DataSectionCheckBase implem
 	}
 
 	@Override
-	protected Predicate<DataSections> getDataSectionPredicate( SparseFileRequest request ) {
+	protected Predicate<DataSection> getDataSectionPredicate( SparseFileRequest request ) {
 		return getNegativeDataSectionOffsetPredicate();
 	}
 	
-	private static Predicate<DataSections> getNegativeDataSectionOffsetPredicate() {
+	private static Predicate<DataSection> getNegativeDataSectionOffsetPredicate() {
 		return ds->
 		ds.getStartOffset() < 0 ||
 		ds.getEndOffset() < 0;

@@ -1,21 +1,24 @@
 package uk.org.freedonia.jsparsefiles.creator;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class SparseFileRequest {
 
 	private Path path;
 	private long size;
-	private DataSections[] sections;
+	private List<DataSection> sections = new ArrayList<>();
 	private boolean overwriteExistingFile = false;
 
-	public SparseFileRequest( Path path, long size, DataSections ...sections ) {
+	public SparseFileRequest( Path path, long size, DataSection ...sections ) {
 		this.setPath( path );
 		this.setSize( size );
 		this.setSections( sections );
 	}
 	
-	public SparseFileRequest( Path path, long size, boolean overwriteExistingFile, DataSections ...sections ) {
+	public SparseFileRequest( Path path, long size, boolean overwriteExistingFile, DataSection ...sections ) {
 		this.setPath( path );
 		this.setSize( size );
 		this.setSections( sections );
@@ -38,12 +41,16 @@ public class SparseFileRequest {
 		this.size = size;
 	}
 
-	public DataSections[] getSections() {
+	public List<DataSection> getSections() {
 		return sections;
 	}
-
-	public void setSections( DataSections[] sections ) {
+	
+	public void setSections( List<DataSection> sections ) {
 		this.sections = sections;
+	}
+
+	public void setSections( DataSection[] sections ) {
+		this.sections.addAll( Arrays.asList( sections ) );
 	}
 
 	public boolean isOverwriteExistingFile() {

@@ -1,11 +1,11 @@
-package uk.org.freedonia.jsparsefiles.creator;
+package uk.org.freedonia.jsparsefiles.creator.writer;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
 import java.nio.file.OpenOption;
-import java.nio.file.StandardOpenOption;
+
+import uk.org.freedonia.jsparsefiles.creator.SparseFileRequest;
 
 /**
  * The SparseFileGenerator is used to generate the file in a hopefully sparse way.
@@ -13,7 +13,7 @@ import java.nio.file.StandardOpenOption;
  * @author jbeeton
  *
  */
-public class SparseFileGenerator {
+public class SparseFileGenerator extends SeekableChannelWriterBase {
 	
 	/**
 	 * generates a sparse file based on the values found in the specified request.
@@ -22,7 +22,7 @@ public class SparseFileGenerator {
 	 */
 	public void generateSparseFile( SparseFileRequest request ) throws IOException {
 		OpenOption[] options = getOptions( request );
-		try ( SeekableByteChannel channel = Files.newByteChannel( request.getPath(), options ) ) {
+		try ( SeekableByteChannel channel = openByteChannel( request.getPath(), options ) ) {
 			if ( request.getSize() > 0 ) {
 				// after repositioning need to write a single byte to ensure that the file
 				// is given size.
@@ -32,21 +32,8 @@ public class SparseFileGenerator {
 		}
 	}
 	
-	private OpenOption[] getOptions( SparseFileRequest request ) {
-		if ( request.isOverwriteExistingFile() ) {
-			return new OpenOption[]{
-					StandardOpenOption.WRITE,
-					StandardOpenOption.CREATE,
-					StandardOpenOption.SPARSE
-			};
-		} else {
-			return new OpenOption[]{
-					StandardOpenOption.WRITE,
-					StandardOpenOption.CREATE_NEW,
-					StandardOpenOption.SPARSE
-			};
-		}
-		
-	}
+	
+
+
 
 }
