@@ -42,5 +42,31 @@ public class DataSection {
 		return "DataSections [startOffset=" + startOffset + ", endOffset="
 				+ endOffset + "]";
 	}
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (int) (endOffset ^ (endOffset >>> 32));
+		result = prime * result + (int) (startOffset ^ (startOffset >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		DataSection other = (DataSection) obj;
+		if (endOffset != other.endOffset)
+			return false;
+		if (startOffset != other.startOffset)
+			return false;
+		return true;
+	}
 
 }
