@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 import java.util.function.Consumer;
 
 import org.apache.commons.io.IOUtils;
@@ -45,14 +44,14 @@ public class SparseFileValidatorUtils {
 	}
 	
 	public static void validateDataSectionsWrittenCorrectly( SparseFileRequest request ) {
-		Arrays.asList( request.getSections() ).parallelStream().forEach( getNotNullConsumer( request ) );
+		request.getSections().parallelStream().forEach( getNotNullConsumer( request ) );
 	}
 	
 	
-	private static Consumer<DataSections> getNotNullConsumer( final SparseFileRequest request ) {
-		return new Consumer<DataSections>(){
+	private static Consumer<DataSection> getNotNullConsumer( final SparseFileRequest request ) {
+		return new Consumer<DataSection>(){
 			@Override
-			public void accept( DataSections t ) {
+			public void accept( DataSection t ) {
 				try {
 					testThatFileIsNotNullBetween( request.getPath().toFile(), t.getStartOffset(), t.getEndOffset() );
 				} catch (IOException e) {

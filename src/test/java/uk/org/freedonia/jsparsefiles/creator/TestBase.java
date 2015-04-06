@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 
@@ -15,6 +16,15 @@ public class TestBase {
 	
 	@Before
 	public void setup() throws IOException {
+		doCleanUp();
+	}
+	
+	@After
+	public void tearDown() throws IOException {
+		doCleanUp();
+	}
+	
+	private void doCleanUp() throws IOException {
 		FileUtils.deleteDirectory( getTestDir().toFile() );
 	}
 	
