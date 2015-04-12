@@ -21,7 +21,6 @@ import uk.org.freedonia.jsparsefiles.creator.TestBase;
 public class TestSparseFileRequestParser extends TestBase {
 	
 	
-	
 	@Test( expected = ParseException.class )
 	public void testWithNoSize() throws ParseException {
 		SparseFileRequestParser parser = new SparseFileRequestParser();
@@ -88,10 +87,13 @@ public class TestSparseFileRequestParser extends TestBase {
 	private List<String> getSizePathAndDataSectionArgs(long size, Path path,
 			List<DataSection> sections) {
 		List<String> args = getSizeAndPathArgs( size, path );
-		for ( DataSection ds : sections ) {
-			args.add( CMDOptions.getDataSectionsOption().getArgName() );
-			args.add( ds.getStartOffset()+","+ds.getEndOffset() );
+		if ( !sections.isEmpty() ) {
+			args.add( "-"+CMDOptions.getDataSectionsOption().getOpt() );
+			for ( DataSection ds : sections ) {
+				args.add( ds.getStartOffset()+","+ds.getEndOffset()  );
+			}
 		}
+	
 		return args;
 	}
 
@@ -104,11 +106,11 @@ public class TestSparseFileRequestParser extends TestBase {
 	}
 	
 	private List<String> getSizeArgs( long size ) {
-		return Arrays.asList(CMDOptions.getSizeOption().getArgName(), ""+size );
+		return Arrays.asList( "-"+CMDOptions.getSizeOption().getOpt(), "" + size );
 	}
 	
 	private List<String> getPathArgs( Path path ) {
-		return Arrays.asList(CMDOptions.getPathOption().getArgName(), path.toString() );
+		return Arrays.asList( "-"+CMDOptions.getPathOption().getOpt(), path.toString() );
 	}
 	
 	
