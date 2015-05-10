@@ -29,6 +29,11 @@ public class TestSparseFileRequestParser extends TestBase {
 		
 	}
 	
+	@Test
+	public void testy() {
+		new HelpPrinter().printHelp(CMDOptions.getOptions());
+	}
+	
 	
 	
 	@Test( expected = ParseException.class )

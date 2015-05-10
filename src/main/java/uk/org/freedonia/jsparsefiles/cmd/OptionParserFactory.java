@@ -21,6 +21,10 @@ public class OptionParserFactory {
 	public static OptionParser getParserFor( Option opt ) throws ParseException {
 		OptionParser parser = null;
 		switch ( opt.getOpt() ) {
+			case CMDOptions.HELP_NAME : {
+				parser = new DataSectionOptionParser();
+				break;
+			}
 			case CMDOptions.SIZE_NAME : {
 				parser = new SizeOptionParser();
 				break;
@@ -31,6 +35,9 @@ public class OptionParserFactory {
 			}
 			case CMDOptions.DATA_SECTIONS_NAME : {
 				parser = new DataSectionOptionParser();
+				break;
+			} case CMDOptions.OVERWRITE_NAME : {
+				parser = new OverwriteOptionParser();
 				break;
 			} default : {
 				throw new ParseException( "Unknown Option type : " + opt.getOpt() );

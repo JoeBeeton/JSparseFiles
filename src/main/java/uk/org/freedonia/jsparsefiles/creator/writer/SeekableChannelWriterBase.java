@@ -20,11 +20,7 @@ public class SeekableChannelWriterBase {
 	
 	protected OpenOption[] getOptions( SparseFileRequest request ) {
 		if ( request.isOverwriteExistingFile() ) {
-			return new OpenOption[]{
-					StandardOpenOption.WRITE,
-					StandardOpenOption.CREATE,
-					StandardOpenOption.SPARSE
-			};
+		return getOverWriteOptions();
 		} else {
 			return new OpenOption[]{
 					StandardOpenOption.WRITE,
@@ -32,6 +28,14 @@ public class SeekableChannelWriterBase {
 					StandardOpenOption.SPARSE
 			};
 		}
+	}
+	
+	protected OpenOption[] getOverWriteOptions() {
+		return new OpenOption[]{
+				StandardOpenOption.WRITE,
+				StandardOpenOption.CREATE,
+				StandardOpenOption.SPARSE
+		};
 	}
 	
 	protected SeekableByteChannel openByteChannel( Path path, OpenOption[] options ) throws IOException {

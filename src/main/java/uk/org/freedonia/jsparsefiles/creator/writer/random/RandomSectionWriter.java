@@ -25,7 +25,7 @@ public class RandomSectionWriter extends SeekableChannelWriterBase {
 	 */
 	public void writeDataSections( SparseFileRequest request ) throws IOException {
 		if ( !request.getSections().isEmpty() ) {
-			OpenOption[] options = getOptions( request );
+			OpenOption[] options = getOverWriteOptions();
 			try ( SeekableByteChannel channel = openByteChannel( request.getPath(), options ) ) {
 				request.getSections().stream().forEach( getDSWriterConsumer( channel ) );
 			}
